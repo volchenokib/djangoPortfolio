@@ -65,56 +65,37 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
 					<div class="navbar-nav ml-auto">
-						<!-- <a class="nav-item nav-link active" href="#">Home</a> -->
-						<a class="nav-item nav-link" href="{% static 'resume.pdf' %}"
-							>Resume</a
-						>
-						<a class="nav-item nav-link" href="{% url 'allBlogs' %}">Blog</a>
+						<!-- <a class="nav-item nav-link" href="#">Home</a> -->
+						<a class="nav-item nav-link" href="#">Resume</a>
+						<a class="nav-item nav-link active" href="#">Blog</a>
 					</div>
 				</div>
 			</nav>
 		</header>
 
 		<main role="main">
-			<section class="jumbotron text-center">
-				<div class="container">
-					<h1 class="jumbotron-heading">Hi, I'm Igor.</h1>
-					<p class="lead text-muted">
-						Hey my name is Igor Volchenok and I love to make Django websites.
-						It's the thrill of handling requests that the people whant!
-					</p>
-					<p>
-						<a href="mailto:" class="btn btn-primary my-2">Email Me</a>
-					</p>
-					<img src="{% static 'ava.jpg' %}" alt="ava" height="300" />
-				</div>
-			</section>
+			<div class="container">
+				<h1 class="text-center pt-3">Welcome to My Blog</h1>
+				<br />
+				<br />
+				<h2>Latest Posts</h2>
+				<hr />
 
-			<div class="album py-5 bg-light">
-				<div class="container">
-					<div class="row">
-						{% for job in jobs.all %}
-						<div class="col-md-4">
-							<div class="card mb-4 shadow-sm">
-								<img
-									class="card-img-top"
-									src="{{ job.image.url }}"
-									alt="project image"
-								/>
-								<div class="card-body">
-									<p class="card-text">{{ job.summary }}</p>
-									<div
-										class="d-flex justify-content-between align-items-center"
-									>
-										<div class="btn-group"></div>
-										<small class="text-muted">9 mins</small>
-									</div>
-								</div>
-							</div>
-						</div>
-						{% endfor %}
-					</div>
-				</div>
+				{% for blog in blogs.all%}
+				<a href="{% url 'detail' blog.id %}">
+					<h3>{{ blog.title }}</h3>
+				</a>
+				<span>{{ blog.pub_date_pretty }}</span>
+
+				<br />
+				<img
+					class="img-thumbnail"
+					src="{{ blog.image.url }}"
+					alt="blog image"
+				/>
+				<br />
+				<p>{{ blog.summary }}</p>
+				{% endfor %}
 			</div>
 		</main>
 
